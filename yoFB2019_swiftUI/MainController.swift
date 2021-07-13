@@ -9,8 +9,26 @@ import UIKit
 import LBTATools
 
 class PostCell: LBTAListCell<String> {
+    
+    let imageView = UIImageView(backgroundColor: .red)
+    let nameLabel = UILabel(text: "Name Label")
+    let dateLabel = UILabel(text: "Friday at 11:11AM")
+    let postTextLabel = UILabel(text: "Here is my post text")
+    let imageViewGrid = UIView(backgroundColor: .yellow)
+    
     override func setupViews() {
-        backgroundColor = .red
+        backgroundColor = .white
+        
+        stack(
+            hstack(
+                imageView.withHeight(40).withWidth(40),
+                   stack(nameLabel,dateLabel),
+                spacing: 8
+            ).padLeft(12).padRight(12).padTop(12),
+            postTextLabel,
+            imageViewGrid,
+            spacing: 8
+        )
     }
 }
 
@@ -18,11 +36,13 @@ class MainController: LBTAListController<PostCell, String>, UICollectionViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.items = ["hello", "WORLD", "1", "2"]
+        collectionView.backgroundColor = .init(white: 0.9, alpha: 1)
+        
+        self.items = ["hello", "WORLD", "1", "2", "3"]
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return .init(width: view.frame.width, height: 200 )
+        return .init(width: view.frame.width, height: 250 )
     }
 }
 
